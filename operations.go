@@ -11,7 +11,7 @@ type Operations interface {
 	Deprovision(string) (*response.Deprovision, *BrokerError)
 	PollLastOperation(string, *PollLastOperationParams) (*response.PollLastOperation, *BrokerError)
 	UpdateInstance(string, *request.UpdateServiceInstance) (*response.UpdateServiceInstance, *BrokerError)
-	Bind(*request.Bind) (*response.Bind, *BrokerError)
+	Bind(string, string, *request.Bind) (*response.Bind, *BrokerError)
 	Unbind(string, string) (*response.Unbind, *BrokerError)
 }
 
