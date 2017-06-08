@@ -20,7 +20,7 @@ func Run(port int, operations Operations) error {
 	r.HandleFunc("/v2/service_instances/{instance_id}", provision(operations)).Methods("PUT")
 
 	// update service instance
-	r.HandleFunc("/v2/service_instances/{instance_id}", updateServiceInstance(operations)).Methods("PATCH")
+	r.HandleFunc("/v2/service_instances/{instance_id}", updateInstance(operations)).Methods("PATCH")
 
 	hostStr := fmt.Sprintf(":%d", port)
 	http.ListenAndServe(hostStr, r)
