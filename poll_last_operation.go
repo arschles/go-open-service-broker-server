@@ -2,7 +2,6 @@ package osbserver
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -29,7 +28,8 @@ func pollLastOperation(ops Operations) http.HandlerFunc {
 			return
 		}
 		if err := json.NewEncoder(w).Encode(resp); err != nil {
-			http.Error(w, fmt.Sprintf("error encoding json (%s)", err), http.StatusInternalServerError)
+			logger.Printf("error encoding json (%s)", err)
+			http.Error(w, "error encoding json", http.StatusInternalServerError)
 			return
 		}
 	}

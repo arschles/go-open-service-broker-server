@@ -13,7 +13,8 @@ func getCatalog(ops Operations) http.HandlerFunc {
 			return
 		}
 		if err := json.NewEncoder(w).Encode(cat); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			logger.Printf("error encoding JSON (%s)", err)
+			http.Error(w, "error encoding JSON", http.StatusInternalServerError)
 			return
 		}
 	}
