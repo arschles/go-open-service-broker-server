@@ -7,10 +7,10 @@ import (
 
 type Operations interface {
 	Catalog() (*response.Catalog, *BrokerError)
-	Provision(*request.Provision) (*response.Provision, *BrokerError)
+	Provision(string, *request.Provision) (*response.Provision, *BrokerError)
 	Deprovision(string) (*response.Deprovision, *BrokerError)
 	PollLastOperation(string, *PollLastOperationParams) (*response.PollLastOperation, *BrokerError)
-	UpdateInstance(*request.UpdateServiceInstance) (*response.UpdateServiceInstance, *BrokerError)
+	UpdateInstance(string, *request.UpdateServiceInstance) (*response.UpdateServiceInstance, *BrokerError)
 	Bind(*request.Bind) (*response.Bind, *BrokerError)
 	Unbind(string, string) (*response.Unbind, *BrokerError)
 }
