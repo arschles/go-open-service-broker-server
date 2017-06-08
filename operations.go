@@ -6,10 +6,17 @@ import (
 )
 
 type Operations interface {
-	Catalog() (*response.Catalog, error)
-	Provision(*request.Provision) (*response.Provision, error)
-	Deprovision(string) (*response.Deprovision, error)
-	UpdateInstance(*request.UpdateServiceInstance) (*response.UpdateServiceInstance, error)
-	Bind(*request.Bind) (*response.Bind, error)
-	Unbind(string, string) (*response.Unbind, error)
+	Catalog() (*response.Catalog, *BrokerError)
+	Provision(*request.Provision) (*response.Provision, *BrokerError)
+	Deprovision(string) (*response.Deprovision, *BrokerError)
+	PollLastOperation(string, *PollLastOperationParams) (*response.PollLastOperation, *BrokerError)
+	UpdateInstance(*request.UpdateServiceInstance) (*response.UpdateServiceInstance, *BrokerError)
+	Bind(*request.Bind) (*response.Bind, *BrokerError)
+	Unbind(string, string) (*response.Unbind, *BrokerError)
+}
+
+type PollLastOperationParams struct {
+	ServiceID string
+	PlanID    string
+	Operation string
 }
