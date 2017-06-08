@@ -16,6 +16,9 @@ func Run(port int, operations Operations) error {
 	// poll last operation
 	r.HandleFunc("/v2/service_instances/{instance_id}/last_operation", pollLastOperation(operations)).Methods("GET")
 
+	// provision
+	r.HandleFunc("/v2/service_instances/{instance_id}", provision(operations)).Methods("PUT")
+
 	hostStr := fmt.Sprintf(":%d", port)
 	http.ListenAndServe(hostStr, r)
 	return nil
